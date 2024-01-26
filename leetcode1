@@ -1,0 +1,10 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        slovarik = {}
+        n = len(nums)
+        for i in range(n):
+            j = target - nums[i]
+            if j in slovarik:
+                return [slovarik[j], i]
+            slovarik[nums[i]] = i
+    
