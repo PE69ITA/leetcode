@@ -1,0 +1,13 @@
+class Solution:
+    def sumOfUnique(self, nums: List[int]) -> int:
+        counter = 0
+        d = set()
+        s = set()
+        for i in nums:
+            if i in d and i not in s:
+                counter -= i
+                s.add(i)
+            elif i not in d:
+                counter+=i
+                d.add(i)
+        return counter
