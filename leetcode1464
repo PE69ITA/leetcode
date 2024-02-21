@@ -1,0 +1,7 @@
+import heapq
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        n_largest = heapq.nlargest(2, nums)
+        for i in n_largest:
+            i=(n_largest[0]-1)*(n_largest[1]-1)
+        return i
