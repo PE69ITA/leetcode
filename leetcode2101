@@ -1,0 +1,36 @@
+import math
+
+class Solution:
+    def maximumDetonation(self, bombs: List[List[int]]) -> int:
+        self.explosed = set()
+        self.answer = 0
+        self.counter = 0
+        self.bombsInRadius = {}
+
+        def rec(b):
+            for bomb in b:
+                if bomb in self.explosed:
+                    pass
+                else:
+                    self.counter += 1
+                    self.explosed.add(bomb)
+                    rec(self.bombsInRadius[bomb])
+            return self.counter
+
+        for i in range(len(bombs)):
+            self.bombsInRadius[i] = []
+            for j in range(len(bombs)):
+                if i == j:
+                    pass
+                xDis = abs(bombs[i][0] - bombs[j][0])
+                yDis = abs(bombs[i][1] - bombs[j][1])
+                zDis = math.sqrt(xDis**2 + yDis**2)
+                if zDis <= bombs[i][2]:
+                    self.bombsInRadius[i].append(j)
+        for k, v in self.bombsInRadius.items():
+            counter = rec(v)
+            if counter > self.answer:
+                self.answer = counter
+            self.explosed = set()
+            self.counter = 0
+        return self.answer
